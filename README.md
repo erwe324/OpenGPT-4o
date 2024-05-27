@@ -1,11 +1,11 @@
-# OpenGPT-4o
-OpenGPT 4o is a fee alternative to OpenAI GPT 4o
+# MiniGPT-4o
+MiniGPT 4o is a fee alternative to OpenAI GPT 4o
 
 Try HERE: https://huggingface.co/spaces/KingNish/GPT-4o
 
-GPT 4o vs OpenGPT 4o
+GPT 4o vs MiniGPT 4o
 
-| Feature               | GPT 4o                | OpenGPT 4o            |
+| Feature               | GPT 4o                | MiniGPT 4o            |
 |-----------------------|-----------------------|-----------------------|
 | Public Availability   | Not fully         | YES                   |
 | Pricing               | FREE and Paid both                  | FREE                  |
