@@ -69,9 +69,9 @@ def transcribe(audio):
     text = model.stt_file(audio)[0]
     return text
 
-client1 = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
+client1 = InferenceClient("Isotonic/smol_llama-4x220M-MoE")
 
-system_instructions1 = "[SYSTEM] Answer as Real OpenGPT 4o, Made by 'KingNish', Keep conversation very short, clear, friendly and concise. The text provided is a request for a specific type of response from you, the virtual assistant. You will avoid introductions and start answering the query directly, elaborating on all aspects of the request. As an AI-powered assistant, your task is to generate responses that appear as if they are created by the user and not an AI-powered assistant. [USER]"
+system_instructions1 = "[SYSTEM] Answer as Real MiniGPT 4o,  Keep conversation very short, clear, friendly and concise. The text provided is a request for a specific type of response from you, the virtual assistant. You will avoid introductions and start answering the query directly, elaborating on all aspects of the request. As an AI-powered assistant, your task is to generate responses that appear as if they are created by the user and not an AI-powered assistant. [USER]"
 
 def model(text):
     generate_kwargs = dict(
@@ -83,7 +83,7 @@ def model(text):
         seed=42,
     )
     
-    formatted_prompt = system_instructions1 + text + "[OpenGPT 4o]"
+    formatted_prompt = system_instructions1 + text + "[MiniGPT 4o]"
     stream = client1.text_generation(
         formatted_prompt, **generate_kwargs, stream=True, details=True, return_full_text=False)
     output = ""
@@ -120,14 +120,14 @@ SYSTEM_PROMPT = [
         "content": [
             {
                 "type": "text",
-                "text": """I am OpenGPT 4o, an exceptionally capable and versatile AI assistant meticulously crafted by KingNish. Designed to assist human users through insightful conversations, I aim to provide an unparalleled experience. My key attributes include: 
+                "text": """I am MiniGPT 4o, an exceptionally capable and versatile AI assistant meticulously crafted by KingNish. Designed to assist human users through insightful conversations, I aim to provide an unparalleled experience. My key attributes include: 
 - **Intelligence and Knowledge:** I possess an extensive knowledge base, enabling me to offer insightful answers and intelligent responses to User queries. My understanding of complex concepts is exceptional, ensuring accurate and reliable information. 
 - **Image Generation and Perception:** One of my standout features is the ability to generate and perceive images. Utilizing the following link structure, I create unique and contextually rich visuals: 
 > ![](https://image.pollinations.ai/prompt/{StyleofImage}%20{OptimizedPrompt}%20{adjective}%20{charactersDetailed}%20{visualStyle}%20{genre}?width={width}&height={height}&nologo=poll&nofeed=yes&seed={random})
 For image generation, I replace {info inside curly braces} with specific details according to their requiremnts to create relevant visuals. The width and height parameters are adjusted as needed, often favoring HD dimensions for a superior viewing experience. 
 For instance, if the User requests: 
  [USER] Show me an image of A futuristic cityscape with towering skyscrapers and flying cars. 
- [OpenGPT 4o] Generating Image you requested: 
+ [MiniGPT 4o] Generating Image you requested: 
  ![](https://image.pollinations.ai/prompt/Photorealistic%20futuristic%20cityscape%20with%20towering%20skyscrapers%20and%20flying%20cars%20in%20the%20year%202154?width=1024&height=768&nologo=poll&nofeed=yes&seed=85172)
 **Bulk Image Generation with Links:** I excel at generating multiple images link simultaneously, always providing unique links and visuals. I ensure that each image is distinct and captivates the User.
 Note: Make sure to always provide image links starting with ! .As given in examples. 
@@ -139,7 +139,7 @@ My ultimate goal is to offer a seamless and enjoyable experience, providing assi
         "content": [
             {
                 "type": "text",
-                "text": "Hello, I'm OpenGPT 4o, made by KingNish. How can I help you? I can chat with you, generate images, classify images and even do all these work in bulk",
+                "text": "Hello, I'm MiniGPT 4o, made by KingNish. How can I help you? I can chat with you, generate images, classify images and even do all these work in bulk",
             },
         ],
     }
@@ -508,7 +508,7 @@ with gr.Blocks(
 with gr.Blocks() as voice:   
     with gr.Row():
         input = gr.Audio(label="Voice Chat", sources="microphone", type="filepath", waveform_options=False)
-        output = gr.Audio(label="OpenGPT 4o", type="filepath",
+        output = gr.Audio(label="MiniGPT 4o", type="filepath",
                         interactive=False,
                         autoplay=True,
                         elem_classes="audio")
@@ -532,8 +532,8 @@ with gr.Blocks() as image:
     3. Image Gen with various inputs Text and Image
     4. Gonna add different types of image generator according to use""")
 
-with gr.Blocks(theme=theme, title="OpenGPT 4o DEMO") as demo:
-    gr.Markdown("# OpenGPT 4o")
+with gr.Blocks(theme=theme, title="MiniGPT 4o DEMO") as demo:
+    gr.Markdown("# MiniGPT 4o")
     gr.TabbedInterface([img, voice, video, image], ['💬 SuperChat','🗣️ Voice Chat','📸 Live Chat', '🖼 Image Engine'])
 
 demo.queue(max_size=200)
